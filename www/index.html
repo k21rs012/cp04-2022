@@ -189,12 +189,14 @@
             active = true;
             startTime = new Date();
             $("body").css("background-color", "yellow");
+            $("#disp1").html("タイマーをスタートします。");
         }
 
         // ButtonBがクリックされた時の処理
         function btnBClick(e) {
             active = false;
             $("body").css("background-color", "skyblue");
+            $("#disp1").html("タイマーを停止します。");
         }
 
         // ButtonCがクリックされた時の処理
@@ -204,11 +206,13 @@
             period = 60 * parseInt($("#minute").val()) + parseInt($("#second").val());
             $("#time").html("経過時間： 0");
             $("#remain").html("残り時間： " + period);
+            $("#disp1").html("");
         }
 
         //ButtonDがクリックされた時の処理
         function btnDClick(e) {
             active = false;
+            $("#disp1").html("5分タイマーをセットしました。");
             $("#minute").val(5);
             $("#second").val(0);
             period = 60 * parseInt($("#minute").val()) + parseInt($("#second").val());
@@ -229,7 +233,8 @@
                     active = false;
                     alarm();
                 }
-                if(rest <= 30){
+                
+                if (rest <= 30) {
                     $("body").css("background-color", "white");
                     $("#remain").css("color", "black");
                 }
@@ -246,6 +251,7 @@
 
     <div id="remain">Remaining time</div>
     <div id="time">Time</div>
+    <div id="disp1"></div>
     <button id="btnA">Start</button>
     <button id="btnB">Stop</button>
     <button id="btnC">Set</button>
