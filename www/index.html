@@ -39,6 +39,10 @@
             $('#btnC').click(function(e) {
                 btnCClick(e);
             });
+
+            $('#btnD').click(function(e) {
+                btnDClick(e);
+            });
             init();
         });
 
@@ -161,6 +165,7 @@
             $('#btnA').prop('disabled', false);
             $('#btnB').prop('disabled', false);
             $('#btnC').prop('disabled', false);
+            $('#btnD').prop('disabled', false);
 
             btnCClick(null);
         }
@@ -183,17 +188,29 @@
         function btnAClick(e) {
             active = true;
             startTime = new Date();
+            $("body").css("background-color", "yellow");
         }
 
         // ButtonBがクリックされた時の処理
         function btnBClick(e) {
             active = false;
+            $("body").css("background-color", "skyblue");
         }
 
         // ButtonCがクリックされた時の処理
         function btnCClick(e) {
             alarm();
             active = false;
+            period = 60 * parseInt($("#minute").val()) + parseInt($("#second").val());
+            $("#time").html("経過時間： 0");
+            $("#remain").html("残り時間： " + period);
+        }
+
+        //ButtonDがクリックされた時の処理
+        function btnDClick(e) {
+            active = false;
+            $("#minute").val(5);
+            $("#second").val(0);
             period = 60 * parseInt($("#minute").val()) + parseInt($("#second").val());
             $("#time").html("経過時間： 0");
             $("#remain").html("残り時間： " + period);
@@ -212,9 +229,11 @@
                     active = false;
                     alarm();
                 }
+                if(rest <= 30){
+                    $("body").css("background-color", "white");
+                    $("#remain").css("color", "black");
+                }
             }
-
-
         }
     </script>
 </head>
@@ -230,6 +249,7 @@
     <button id="btnA">Start</button>
     <button id="btnB">Stop</button>
     <button id="btnC">Set</button>
+    <button id="btnD">5分タイマー</button>
     <input type="number" id="minute" value=0>
     <input type="number" id="second" value=15>
 </body>
